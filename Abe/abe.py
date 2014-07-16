@@ -39,15 +39,13 @@ import base58
 
 __version__ = version.__version__
 
-ABE_APPNAME = 'Nyanchain'
+ABE_APPNAME = 'ImperialChain'
 ABE_VERSION = __version__
-ABE_URL = 'https://github.com/charlesfeng/nyancha.in'
+ABE_URL = 'https://github.com/ImperialCoin/ImperialChain'
 
 COPYRIGHT_YEARS = '2011'
 COPYRIGHT = "Abe developers"
 COPYRIGHT_URL = 'https://github.com/bitcoin-abe'
-
-DONATIONS_NYAN = 'KD144Fmm94D6goqvda8ksAQTpgLNspuSPA'
 
 TIME1970 = time.strptime('1970-01-01','%Y-%m-%d')
 EPOCH1970 = calendar.timegm(TIME1970)
@@ -56,13 +54,13 @@ EPOCH1970 = calendar.timegm(TIME1970)
 # Configurable templates may contain either.  HTML seems better supported
 # under Internet Explorer.
 DEFAULT_CONTENT_TYPE = "text/html; charset=utf-8"
-DEFAULT_HOMEPAGE = "chain/Nyancoin";
+DEFAULT_HOMEPAGE = "chain/ImperialCoin";
 DEFAULT_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>%(title)s</title>
-    <meta name="description" content="Nyancoin Block Explorer: view detailed information on all Nyancoin transactions and blocks.">
+    <meta name="description" content="ImperialCoin Block Explorer: view detailed information on all ImperialCoin transactions and blocks.">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="%(dotdot)s%(STATIC_PATH)sabe.css" />
@@ -73,28 +71,28 @@ DEFAULT_TEMPLATE = """
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-36765833-7', 'nyancha.in');
+      ga('create', 'UA-36765833-7', 'ImperialChain');
       ga('send', 'pageview');
     </script>
 </head>
 <body>
     <div class="header">
-        <a href="%(dotdot)s%(HOMEPAGE)s"><img src="%(dotdot)s%(STATIC_PATH)snyanchain.png" alt="" height="100"></a>
+        <a href="%(dotdot)s%(HOMEPAGE)s"><img src="%(dotdot)s%(STATIC_PATH)sImperialChain.png" alt="" height="100"></a>
     </div>
     <div class="content">
         <h1 class="pull-left">%(h1)s</h1>
         %(body)s
         <hr class="clear">
         <div class="footer">
-            <a href="http://nyancoin.org" target="_blank"><i class="fa fa-rocket"></i>Nyancoin</a>
-            <a href="http://reddit.com/r/nyancoins" target="_blank"><i class="fa fa-comment"></i>/r/nyancoins</a>
-            <a href="http://nyancha.in/address.html" target="_blank"><i class="fa fa-qrcode"></i>Wallets</a>
-            <a href="http://nyancha.in/q"><i class="fa fa-code"></i>API</a>
-            <a href="http://nyancha.in/address/KD144Fmm94D6goqvda8ksAQTpgLNspuSPA"><i class="fa fa-heart"></i>Donate</a>
+            <a href="http://ImperialCoin.org" target="_blank"><i class="fa fa-rocket"></i>ImperialCoin</a>
+            <a href="http://reddit.com/r/ImperialCoins" target="_blank"><i class="fa fa-comment"></i>/r/ImperialCoins</a>
+            <a href="http://ImperialChain/address.html" target="_blank"><i class="fa fa-qrcode"></i>Wallets</a>
+            <a href="http://ImperialChain/q"><i class="fa fa-code"></i>API</a>
+            <a href="http://ImperialChain/address/KD144Fmm94D6goqvda8ksAQTpgLNspuSPA"><i class="fa fa-heart"></i>Donate</a>
         </div>
     </div>
     <div id="nyans"></div>
-    <script src="/nyan.js"></script>
+    <script src="/nyans.js"></script>
 </body>
 </html>
 """
@@ -225,7 +223,7 @@ class Abe:
 
         status = '200 OK'
         page = {
-            "title": 'Nyanchain: Nyancoin Block Explorer',
+            "title": 'ImperialChain: ImperialCoin Block Explorer',
             "body": [],
             "env": env,
             "params": {},
@@ -298,7 +296,7 @@ class Abe:
         return getattr(abe, 'handle_' + cmd, None)
 
     def handle_chains(abe, page):
-        page['title'] = 'Nyanchain: Nyancoin Block Explorer'
+        page['title'] = 'ImperialChain: ImperialCoin Block Explorer'
         page['h1'] = ' '
         body = page['body']
         body += [
@@ -327,7 +325,7 @@ class Abe:
             chain = abe._row_to_chain((row[8], name, row[9], row[10], row[11]))
             body += [
                 '<tr><td><a href="chain/', escape(name), '">',
-                escape(name), '</a></td><td>', escape('NYAN'), '</td>']
+                escape(name), '</a></td><td>', escape('IMP'), '</td>']
 
             if row[1] is not None:
                 (height, nTime, hash) = (
@@ -425,7 +423,7 @@ class Abe:
             abe.call_handler(page, cmd)
             return
 
-        page['title'] = 'Nyanchain: Nyancoin Block Explorer'
+        page['title'] = 'ImperialChain: ImperialCoin Block Explorer'
         page['h1'] = ' '
 
         body = page['body']
@@ -605,10 +603,10 @@ class Abe:
                                   (block_id,))
 
         if chain is None:
-            page['title'] = ['Block ', block_hash[:4], '...', block_hash[-10:], ' - Nyanchain']
+            page['title'] = ['Block ', block_hash[:4], '...', block_hash[-10:], ' - ImperialChain']
             page['h1'] = ['<small>Block</small> ', block_hash[:4], '...', block_hash[-10:]]
         else:
-            page['title'] = ['Block ', height, ' - Nyanchain']
+            page['title'] = ['Block ', height, ' - ImperialChain']
             page['h1'] = ['<small>Block</small> <a href="', page['dotdot'], 'chain/',
                           escape(chain['name']), '?hi=', height, '">',
                           height, '</a>']
@@ -767,7 +765,7 @@ class Abe:
             raise PageNotFound()
 
         block_hash = block_hash.lower()  # Case-insensitive, BBE compatible
-        page['title'] = 'Block - Nyanchain'
+        page['title'] = 'Block - ImperialChain'
         page['h1'] = 'Block'
 
         if not is_hash_prefix(block_hash):
@@ -793,7 +791,7 @@ class Abe:
         else:
             chain_id, block_id, height = row
             chain = abe.chain_lookup_by_id(chain_id)
-            page['title'] = ['Block ', height, ' - Nyanchain']
+            page['title'] = ['Block ', height, ' - ImperialChain']
             page['h1'] = ['<small>Block</small> ', height]
             abe._show_block('block_id = ?', (block_id,), page, '', chain)
 
@@ -803,7 +801,7 @@ class Abe:
             raise PageNotFound()
 
         tx_hash = tx_hash.lower()  # Case-insensitive, BBE compatible
-        page['title'] = ['Transaction ', tx_hash[:10], '...', tx_hash[-4:], ' - Nyanchain']
+        page['title'] = ['Transaction ', tx_hash[:10], '...', tx_hash[-4:], ' - ImperialChain']
         page['h1'] = ['<small>Transaction</small> ', tx_hash[:10], '...', tx_hash[-4:]]
         body = page['body']
 
@@ -995,7 +993,7 @@ class Abe:
             raise PageNotFound()
 
         body = page['body']
-        page['title'] = 'Address ' + escape(address) + ' - Nyanchain'
+        page['title'] = 'Address ' + escape(address) + ' - ImperialChain'
         page['h1'] = '<small>Address</small> ' + escape(address)
         version, binaddr = util.decode_check_address(address)
         if binaddr is None:
@@ -1116,7 +1114,7 @@ class Abe:
                 if chain_id != chain_ids[0]:
                     ret += [', ']
                 ret += [format_satoshis(amounts[chain_id], chain),
-                        ' ', escape('NYAN')]
+                        ' ', escape('IMP')]
                 if link:
                     other = util.hash_to_address(
                         chain['address_version'], binaddr)
@@ -1169,7 +1167,7 @@ class Abe:
                 body += [format_satoshis(elt['value'], chain)]
             body += ['</td><td>',
                      format_satoshis(balance[elt['chain_id']], chain),
-                     '</td><td>', escape('NYAN'),
+                     '</td><td>', escape('IMP'),
                      '</td></tr>\n']
         body += ['</table>\n']
 
@@ -1183,7 +1181,7 @@ class Abe:
             '<span class="input-group-btn"><button class="btn btn-info" type="submit">Search</button></span></div></form></div>\n']
 
     def handle_search(abe, page):
-        page['title'] = 'Search - Nyanchain'
+        page['title'] = 'Search - ImperialChain'
         q = (page['params'].get('q') or [''])[0]
         if q == '':
             page['body'] = [
@@ -1354,7 +1352,7 @@ class Abe:
         Currently, this is limited to chain names and currency codes."""
         def process(row):
             (name, code3) = row
-            return { 'name': name + ' (NYAN)',
+            return { 'name': name + ' (IMP)',
                      'uri': 'chain/' + str(name) }
         ret = map(process, abe.store.selectall("""
             SELECT chain_name, chain_code3
@@ -1386,7 +1384,7 @@ class Abe:
             if cmd is not None:
                 raise PageNotFound()  # XXX want to support /a/...
 
-            page['title'] = ['Block ', height, ' - Nyanchain']
+            page['title'] = ['Block ', height, ' - ImperialChain']
             page['h1'] = ['<small>Block</small> ', height]
             abe._show_block(
                 'chain_id = ? AND block_height = ? AND in_longest = 1',
@@ -1553,7 +1551,7 @@ class Abe:
                     page['content_type'] = 'application/json'
 
     def q(abe, page):
-        page['title'] = 'API - Nyanchain'
+        page['title'] = 'API - ImperialChain'
         page['h1'] = ' '
         page['body'] = ['<h3>Supported APIs:</h3><dl class="dl-horizontal">\n']
         for name in dir(abe):
@@ -2208,7 +2206,7 @@ def main(argv):
             "COPYRIGHT": COPYRIGHT,
             "COPYRIGHT_YEARS": COPYRIGHT_YEARS,
             "COPYRIGHT_URL": COPYRIGHT_URL,
-            "DONATIONS_NYAN": DONATIONS_NYAN,
+            "DONATIONS_IMP": DONATIONS_IMP,
             "CONTENT_TYPE": DEFAULT_CONTENT_TYPE,
             "HOMEPAGE": DEFAULT_HOMEPAGE,
             },
